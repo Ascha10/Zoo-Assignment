@@ -12,11 +12,8 @@ require('./Config/passport')(passport);
 
 
 
-// app.use(cors({credentials : true,origin: ['http://localhost:3000'],SupportsCredentials : true,allowedHeaders : ['GET', 'POST', 'PUT', 'DELETE']}));
-// app.use(cors({credentials : true,origin: ['http://localhost:3000'],SupportsCredentials : true,allowedHeaders : ['GET', 'POST', 'PUT', 'DELETE']}));
 app.use(cors());
 
-// built-in middleware to handle urlencoded form data
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json()); 
@@ -27,26 +24,10 @@ app.use(passport.initialize());
 app.use('/Api',authRoutes);
 app.use('/Api',passport.authenticate('jwt',{session:false}),animalsRoutes);
 
-//for validation..must be after route middelware
-// app.use((err,req,res,next) => {
-//     res.status(422).send({Error : err.message});
-// })
 
 
 const port =  process.env.PORT || 7000 ;
 app.listen(port,() => {
     console.log(`listening on port ${port}`);
 })
-
-if (process.env.NODE_ENV === 'production'){ 
-    app.use(express.static(path.join(__dirname,'../Client/build')))
-    app.get('*',(req,res)=>{
-        res.sendFile(path.join(__dirname, '../Client/build','index.html'))
-    });
-}
-// } else {
-//     app.get('/', (req,res) =>{
-//         res.send("Api running")
-//     })
-// }
 

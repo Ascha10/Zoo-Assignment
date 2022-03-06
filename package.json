@@ -8,7 +8,7 @@
     "server": "node Server/server.js",
     "start": "node Server/server.js",
     "server-dev": "nodemon Server/server.js",
-    "heroku-postbuild": "npm install && npm start "
+    "setup": "npm install && npm start "
   },
   "author": "",
   "license": "ISC",
